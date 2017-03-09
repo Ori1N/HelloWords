@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static final boolean GO_TO_CROSSWORD = true;
+    private static final boolean GO_TO_CROSSWORD = false;
 
 
     @Override
