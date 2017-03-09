@@ -20,7 +20,7 @@
 
     <style name="Crossword_Input">
         <item name="android:layout_height">30dp</item>
-        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_width">60dp</item>
         <item name="android:background">@color/gray_light</item>
         <item name="android:layout_margin">5dp</item>
     </style>
@@ -28,7 +28,7 @@
     <style name="Keyboard_Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:minWidth">15dp</item>
+        <item name="android:minWidth">25dp</item>
         <item name="android:textSize">20sp</item>
     </style>
 
