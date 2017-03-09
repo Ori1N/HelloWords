@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hackathon.hellowords.TopicActivity">
+    android:orientation="vertical"
+    tools:context="com.hackathon.hellowords.CrosswordActivity"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,5 +23,112 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
 
-</android.support.design.widget.CoordinatorLayout>
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:rowCount="7"
+            android:columnCount="10"
+            android:layout_gravity="center"
+            >
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+            <View style="@style/Crossword_Input" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        >
+
+        <include layout="@layout/layout_keyboard" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

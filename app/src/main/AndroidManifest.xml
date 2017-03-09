@@ -8,8 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        android:theme="@style/AppTheme"
+        >
+        <activity android:name=".SplashScreen"
+                  android:screenOrientation="landscape"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -20,13 +23,16 @@
         <activity
             android:name=".TopicActivity"
             android:label="@string/title_activity_topic"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".CrosswordActivity"
             android:label="@string/title_activity_topic"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            >
         </activity>
 
     </application>
