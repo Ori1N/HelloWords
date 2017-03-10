@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 public class CrosswordActivity extends AppCompatActivity {
 
@@ -61,6 +62,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
 
         states = new CellState[crossword.length][crossword[0].length];
+//        Toasty.success(this, "Success!", Toast.LENGTH_SHORT, true).show();
 //        Toast.makeText(getApplicationContext(), "i size:"+crossword.length +" j size:"+crossword[0].length, Toast.LENGTH_SHORT).show();
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[0].length; j++) {
@@ -135,6 +137,40 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
 
+    @OnLongClick(R.id.crossword_guide)
+    public boolean onOwlLongClick(View v) {
+        showHint();
+        return true;
+    }
+
+    private boolean mHintShown = false;
+    private void showHint() {
+        if (mHintShown) {
+            Toast.makeText(getApplicationContext(), "Already used a hint today...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int hintsCounter = 0;
+        // go over states array, find first uncompleted items (search by matrix order)
+        for (int i = 0; i < states.length; ++i) {
+            for (int j = 0; j < states[i].length; j++) {
+
+                if (states[i][j] == CellState.NOT_COMPLETED) {
+                    fillCrosswordChar(i, j);
+
+                    // after filling
+                    if (++hintsCounter >= 3) {
+                        mHintShown = true;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private void fillCrosswordChar(int i, int j) {
+        // todo!
+    }
 
     private ViewGroup getCrosswordUnit(int i, int j) {
         ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
@@ -216,7 +252,7 @@ public class CrosswordActivity extends AppCompatActivity {
                         onSuccess(innerView);
                         mAnswer = 0;
                     } else {
-                        Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
                     }
 
                     break;
@@ -231,7 +267,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
     }
     private void WordCompleted(){
-        Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
 
         ++words.completed;
 

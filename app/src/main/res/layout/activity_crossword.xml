@@ -29,6 +29,7 @@
             android:orientation="vertical"
             android:paddingLeft="40dp"
             android:paddingStart="40dp"
+            android:paddingTop="10dp"
             >
 
             <LinearLayout
@@ -264,8 +265,8 @@
 
         <ImageView
             android:id="@+id/crossword_guide"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:src="@drawable/owl_1"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="-30dp"
