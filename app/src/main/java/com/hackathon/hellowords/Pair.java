@@ -6,10 +6,10 @@ package com.hackathon.hellowords;
 
 public class Pair {
     int completed;
-    int uncompleted;
+    int totalToComplete;
 
-    public Pair(int completed,int uncompleted) {
+    public Pair(int completed,int totalToComplete) {
         this.completed = completed;
-        this.uncompleted = uncompleted;
+        this.totalToComplete = totalToComplete;
     }
 }

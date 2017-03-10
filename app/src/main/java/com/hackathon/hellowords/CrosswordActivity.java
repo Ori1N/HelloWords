@@ -204,11 +204,11 @@ public class CrosswordActivity extends AppCompatActivity {
                         Pair rowResult = checkRow(i,j);
                         Pair colResult = checkCol(i,j);
 
-                        if (( colResult.completed > 1)  && (colResult.uncompleted == 1))  { // check there is exactly
+                        if (( colResult.completed > 1)  && (colResult.totalToComplete == 1))  { // check there is exactly
                             WordCompleted();
                         }
 
-                        if (( rowResult.completed > 1)  && (rowResult.uncompleted == 1))  { // check there is exactly
+                        if (( rowResult.completed > 1)  && (rowResult.totalToComplete == 1))  { // check there is exactly
                             WordCompleted();
                         }
                         states[i][j] = CellState.COMPLETED; // set state to completed
@@ -249,8 +249,17 @@ public class CrosswordActivity extends AppCompatActivity {
         if (newOwlIcon != -1) {
             mOwlGuide.setImageResource(newOwlIcon);
         }
+        if (words.completed == words.totalToComplete){
+            FinishedCrossword();
+        }
 
     }
+
+    private void FinishedCrossword(){
+        Utils.launchActivity(this, CongratulationsActivity.class);
+        finish();
+    }
+
     private Pair checkCol(int i, int j) {
         int uncompleted = 0;
         int completed = 0;
