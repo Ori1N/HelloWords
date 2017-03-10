@@ -29,7 +29,7 @@ public class CrosswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crossword);
 
-        this.crossword = CrosswordUtils.getCrossword();
+        this.crossword = CrosswordUtils.getCrosswordMatrix();
         this.words = new Pair(0, CrosswordUtils.getWords());
 
         initializeCrosswordViews();
@@ -63,7 +63,7 @@ public class CrosswordActivity extends AppCompatActivity {
                     // show it
                     getCrosswordUnit(viewI, viewJ).setVisibility(View.VISIBLE);
                     // set onDragListener with the right character
-                    getCrosswordUnit(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(c));
+                    getCrosswordUnit(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(i, j));
                     // set text to the right answer
                     getCrosswordUnitText(viewI, viewJ).setText(String.valueOf(c));
                 }
