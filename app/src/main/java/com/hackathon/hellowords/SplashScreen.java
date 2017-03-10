@@ -28,7 +28,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 proceed();
             }
-        }, 5000);
+        }, 3000);
     }
 
     private void loadAnimation() {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="5"
+    android:weightSum="6"
     tools:context="com.hackathon.hellowords.CrosswordActivity">
 
     <LinearLayout
@@ -14,94 +14,123 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="4"
-        android:layout_marginTop="10dp">
+        android:gravity="center"
+        >
 
-        <GridLayout
+        <LinearLayout
             android:id="@+id/crossword_container"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:rowCount="7"
-            android:columnCount="10"
-            android:layout_gravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_gravity="center_horizontal"
+                >
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+            </LinearLayout>
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_gravity="center_horizontal"
+                >
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+            </LinearLayout>
 
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
-            <TextView style="@style/Crossword_Input" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_gravity="center_horizontal"
+                >
 
-        </GridLayout>
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -109,9 +138,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp">
+        android:layout_weight="2"
+        >
 
         <GridLayout
             android:id="@+id/gl_keys"

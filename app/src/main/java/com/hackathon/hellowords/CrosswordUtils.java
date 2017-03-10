@@ -17,7 +17,7 @@ public class CrosswordUtils {
 
     }
 
-    public static boolean checkInput(char[][] crossword, int i, int j, char input) {
-        return (crossword[i][j] == input);
-    }
+//    public static boolean checkInput(char[][] crossword, int i, int j, char input) {
+//        return (crossword[i][j] == input);
+//    }
 }

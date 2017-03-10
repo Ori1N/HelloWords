@@ -9,63 +9,78 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CrosswordActivity extends AppCompatActivity {
 
     private ViewGroup mCrosswordContainer;
-    View mCurrentDrag = null;
+    TextView mCurrentDrag = null;
+
+    //ViewGroup[][]  mCrosswordUnits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crossword);
 
+        initializeCrosswordViews(CrosswordUtils.getCrossword());
+    }
+
+    private void initializeCrosswordViews(char[][] crossword) {
+
         mCrosswordContainer = (ViewGroup) findViewById(R.id.crossword_container);
-        initializeCrossword(CrosswordUtils.getCrossword());
+        //mCrosswordUnits = new ViewGroup[crossword.length][crossword[0].length];
+
+        for (int i = 0; i < crossword.length; i++) {
+            for (int j = 0; j < crossword[0].length; j++) {
+
+                ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
+                //mCrosswordUnits[i][j] = (ViewGroup) rowContainer.getChildAt(j);
+
+                char c = crossword[i][j];
+
+                // if crossword unit doesn't contain entry
+                if (c == 0) {
+                    // hide crossword unit
+                    getCrosswordUnit(i, j).setVisibility(View.INVISIBLE);
+                    // else
+                } else {
+                    // set onDragListener with the right character
+                    getCrosswordUnit(i, j).setOnDragListener(new OnCrosswordUnitDragListener(c));
+                    // set text to the right answer
+                    getCrosswordUnitText(i, j).setText(String.valueOf(c));
+                }
+            }
+        }
 
 
         GridLayout keysGrid = (GridLayout) findViewById(R.id.gl_keys);
         for (int i = 0; i < keysGrid.getChildCount(); ++i){
             keysGrid.getChildAt(i).setOnTouchListener(new MyTouchListener());
         }
-
-        GridLayout crossWordGrid = (GridLayout) findViewById(R.id.crossword_container);
-        for (int i = 0; i < crossWordGrid.getChildCount(); ++i){
-            crossWordGrid.getChildAt(i).setOnDragListener(new MyDragListener());
-        }
-    }
-
-    private void initializeCrossword(char[][] crossword) {
-
-        for (int i = 0; i < crossword.length; i++) {
-            for (int j = 0; j < crossword[0].length; j++) {
-                char c = crossword[i][j];
-
-                if (c == 0) {
-                    getCrosswordInput(i, j).setVisibility(View.INVISIBLE);
-                }
-            }
-        }
     }
 
 
-    private static final int ROW_LENGTH = 10;
-
-    private TextView getCrosswordInput(int i, int j) {
-        return (TextView) mCrosswordContainer.getChildAt(i * ROW_LENGTH + j);
+    private ViewGroup getCrosswordUnit(int i, int j) {
+        ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
+        return (ViewGroup) rowContainer.getChildAt(j);
     }
 
-    private void setCrosswordCharacter(int i, int j, char c) {
-        getCrosswordInput(i, j).setText(String.valueOf(c));
+    private TextView getCrosswordUnitText(int i, int j) {
+        return (TextView) getCrosswordUnit(i, j).getChildAt(0);
     }
 
+    private char getDraggedChar() {
+        if (mCurrentDrag == null) return 0;
+        return mCurrentDrag.getText().charAt(0);
+    }
 
 
     private final class MyTouchListener implements View.OnTouchListener {
 
         public boolean onTouch(View view, MotionEvent motionEvent) {
 //            Toast.makeText(getApplicationContext(), "Toast", Toast.LENGTH_LONG).show();
-            mCurrentDrag = view;
+            mCurrentDrag = (TextView) view;
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
@@ -79,7 +94,12 @@ public class CrosswordActivity extends AppCompatActivity {
         }
     }
 
-    class MyDragListener implements View.OnDragListener {
+    class OnCrosswordUnitDragListener implements View.OnDragListener {
+
+        private char mAnswer;
+        public OnCrosswordUnitDragListener(char answer) {
+            mAnswer = answer;
+        }
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
@@ -100,13 +120,13 @@ public class CrosswordActivity extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
                     //Dropped, reassign View to ViewGroup
 
-                    TextView dest = (TextView) v;
-                    TextView src = (TextView) mCurrentDrag;
-                    dest.setText(src.getText());
-                    if (dest.getText().equals(src.getText())){
-
+                    if (getDraggedChar() == mAnswer) {
+                        View innerView = ((ViewGroup) v).getChildAt(0);
+                        Utils.showViewWithFadeIn(getApplicationContext(), innerView);
+                        SoundHandler.playWinSound(getBaseContext());
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
                     }
-                    //SoundHandler.playWinSound(getBaseContext());
 
                     break;
 
@@ -118,4 +138,5 @@ public class CrosswordActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }
