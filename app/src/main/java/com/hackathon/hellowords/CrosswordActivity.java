@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 public class CrosswordActivity extends AppCompatActivity {
 
@@ -135,6 +136,39 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
 
+    @OnLongClick(R.id.crossword_guide)
+    public void onOwlLongClick() {
+        showHint();
+    }
+
+    private boolean mHintShown = false;
+    private void showHint() {
+        if (mHintShown) {
+            Toast.makeText(getApplicationContext(), "Already used a hint today...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int hintsCounter = 0;
+        // go over states array, find first uncompleted items (search by matrix order)
+        for (int i = 0; i < states.length; ++i) {
+            for (int j = 0; j < states[i].length; j++) {
+
+                if (states[i][j] == CellState.NOT_COMPLETED) {
+                    fillCrosswordChar(i, j);
+
+                    // after filling
+                    if (++hintsCounter >= 3) {
+                        mHintShown = true;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private void fillCrosswordChar(int i, int j) {
+        // todo!
+    }
 
     private ViewGroup getCrosswordUnit(int i, int j) {
         ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
