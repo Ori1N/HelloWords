@@ -11,6 +11,7 @@
     android:background="@drawable/game_screen_bg"
     >
 
+    <!-- crossword -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,13 +32,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="8"
+                android:weightSum="9"
                 android:layout_gravity="center_horizontal"
                 >
 
                 <include layout="@layout/crossword_unit" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/crossword_bear"
+                    android:layout_weight="1"
+                    />
                 <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/crossword_zebra"
+                    android:layout_weight="1"
+                    />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
@@ -50,18 +62,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="8"
+                android:weightSum="9"
                 android:layout_gravity="center_horizontal"
                 >
 
                 <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/crossword_hare"
+                    android:layout_weight="1"
+                    />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/crossword_tiger"
+                    android:layout_weight="1"
+                    />
 
             </LinearLayout>
 
@@ -69,18 +94,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="8"
+                android:weightSum="10"
                 android:layout_gravity="center_horizontal"
                 >
 
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/crossword_elephant"
+                    android:layout_weight="1"
+                    />
+
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
 
             </LinearLayout>
 
@@ -88,18 +128,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="8"
+                android:weightSum="9"
                 android:layout_gravity="center_horizontal"
                 >
 
                 <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
 
             </LinearLayout>
 
@@ -107,18 +152,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="8"
+                android:weightSum="9"
                 android:layout_gravity="center_horizontal"
                 >
 
                 <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
-                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
 
             </LinearLayout>
 
@@ -126,7 +176,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="8"
+                android:weightSum="9"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="9"
                 android:layout_gravity="center_horizontal"
                 >
 
@@ -138,6 +211,8 @@
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
+                <include layout="@layout/crossword_unit"
+                         android:visibility="visible" />
 
             </LinearLayout>
 
@@ -145,6 +220,7 @@
 
     </LinearLayout>
 
+    <!-- keyboard -->
     <LinearLayout
         android:id="@+id/gl_keys"
         android:layout_width="match_parent"
@@ -213,8 +289,8 @@
             <TextView
                 style="@style/Keyboard_Button"
                 android:text="M"/>
-            </LinearLayout>
 
+            </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

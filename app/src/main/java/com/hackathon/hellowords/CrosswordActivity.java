@@ -7,7 +7,6 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +23,7 @@ public class CrosswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crossword);
 
-        initializeCrosswordViews(CrosswordUtils.getCrossword());
-
-
+        initializeCrosswordViews(CrosswordUtils.getCrosswordMatrix());
     }
 
     private void initializeCrosswordViews(char[][] crossword) {
