@@ -28,7 +28,21 @@ public class SoundHandler {
         @RawRes int soundRes = -1;
 
         switch (animalType) {
-            // todo: apply resource by enum
+            case ELEPHANT:
+                soundRes = R.raw.elephant;
+                break;
+            case BEAR:
+                soundRes = R.raw.bear;
+                break;
+            case ZEBRA:
+                soundRes = R.raw.zebra;
+                break;
+            case HARE:
+                soundRes = R.raw.hare;
+                break;
+            case TIGER:
+                soundRes = R.raw.tiger;
+                break;
         }
 
         if (soundRes != -1) {
@@ -38,5 +52,9 @@ public class SoundHandler {
 
     }
 
+    public static void playWordCompletion(Context context) {// TOOD change to owlSound
+        MediaPlayer wordCompleted = MediaPlayer.create(context, R.raw.win_sound);
+        wordCompleted.start();
+    }
 
 }
