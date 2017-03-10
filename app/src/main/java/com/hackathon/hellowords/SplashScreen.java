@@ -3,6 +3,8 @@ package com.hackathon.hellowords;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
+
 public class SplashScreen extends AppCompatActivity {
 
     private static final boolean GO_TO_CROSSWORD = false;
@@ -18,7 +20,13 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        loadAnimation();
         proceed();
+    }
+
+    private void loadAnimation() {
+//        Glide.with(getApplicationContext())
+//                .load(R.drawable.animalicon)
     }
 
     private void proceed() {
