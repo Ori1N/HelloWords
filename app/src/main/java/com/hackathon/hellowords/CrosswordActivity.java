@@ -103,6 +103,7 @@ public class CrosswordActivity extends AppCompatActivity {
                     TextView dest = (TextView) v;
                     TextView src = (TextView) mCurrentDrag;
                     dest.setText(src.getText());
+
                     if (dest.getText().equals(src.getText())){
 
                     }
