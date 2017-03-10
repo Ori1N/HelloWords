@@ -16,7 +16,8 @@ public class CrosswordActivity extends AppCompatActivity {
     private ViewGroup mCrosswordContainer;
     TextView mCurrentDrag = null;
     int [] mCharsAtCrossWord = new int[26];
-    //ViewGroup[][]  mCrosswordUnits;
+
+    ViewGroup mKeyboardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
     private void initializeCrosswordViews(char[][] crossword) {
+        mKeyboardView = (ViewGroup) findViewById((R.id.gl_keys));
 
         mCrosswordContainer = (ViewGroup) findViewById(R.id.crossword_container);
         //mCrosswordUnits = new ViewGroup[crossword.length][crossword[0].length];
@@ -53,9 +55,11 @@ public class CrosswordActivity extends AppCompatActivity {
             }
         }
 
-        GridLayout keysGrid = (GridLayout) findViewById(R.id.gl_keys);
-        for (int i = 0; i < keysGrid.getChildCount(); ++i){
-            keysGrid.getChildAt(i).setOnTouchListener(new MyTouchListener());
+        for (int i = 0; i < mKeyboardView.getChildCount(); i++) {
+            ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
+            for (int j = 0; i < keyboardLine.getChildCount(); ++j) {
+                keyboardLine.getChildAt(j).setOnTouchListener(new MyTouchListener());
+            }
         }
 
         RefreshKeyboard();
@@ -147,16 +151,17 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
     private void RefreshKeyboard() {
-        GridLayout keysGrid = (GridLayout) findViewById(R.id.gl_keys);
-        for (int i = 0; i < keysGrid.getChildCount(); ++i){
+        for (int i = 0; i < mKeyboardView.getChildCount(); ++i){
 
-            TextView keyTextView = (TextView) keysGrid.getChildAt(i);
-            if (mCharsAtCrossWord[getCharValue(keyTextView.getText().charAt(0))] > 0 ) {
-                keyTextView.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                keyTextView.setVisibility(View.GONE);
+            ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
+            for (int j = 0; j < keyboardLine.getChildCount(); j++) {
+
+                TextView keyTextView = (TextView) keyboardLine.getChildAt(j);
+                if (mCharsAtCrossWord[getCharValue(keyTextView.getText().charAt(0))] > 0) {
+                    keyTextView.setVisibility(View.VISIBLE);
+                } else {
+                    keyTextView.setVisibility(View.GONE);
+                }
             }
         }
     }
