@@ -73,6 +73,7 @@
                 <include layout="@layout/crossword_unit"
                          android:visibility="visible" />
                 <include layout="@layout/crossword_unit" />
+
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"

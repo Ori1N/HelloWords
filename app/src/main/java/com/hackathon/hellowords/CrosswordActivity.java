@@ -36,17 +36,18 @@ public class CrosswordActivity extends AppCompatActivity {
             for (int j = 0; j < crossword[0].length; j++) {
 
                 char c = crossword[i][j];
+                int viewI = i + 1, viewJ = j + 1;
 
                 // if crossword unit contains entry
                 if (c != 0) {
 
                     ++mCharsAtCrossWord[getCharValue(c)];
                     // show it
-                    getCrosswordUnit(i, j).setVisibility(View.VISIBLE);
+                    getCrosswordUnit(viewI, viewJ).setVisibility(View.VISIBLE);
                     // set onDragListener with the right character
-                    getCrosswordUnit(i, j).setOnDragListener(new OnCrosswordUnitDragListener(c));
+                    getCrosswordUnit(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(c));
                     // set text to the right answer
-                    getCrosswordUnitText(i, j).setText(String.valueOf(c));
+                    getCrosswordUnitText(viewI, viewJ).setText(String.valueOf(c));
                 }
             }
         }
