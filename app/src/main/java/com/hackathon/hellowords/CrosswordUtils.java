@@ -1,5 +1,7 @@
 package com.hackathon.hellowords;
 
+import android.support.annotation.DrawableRes;
+
 /**
  * Created by Ori on 10/03/2017.
  */
@@ -22,6 +24,10 @@ public class CrosswordUtils {
 //                { 0,    0,  'R',    0,      0,      0,      0,      'R',    0,      0 }
         };
 
+    }
+
+    public static @DrawableRes int getCrosswordIcon() {
+        return -1;
     }
 
 //    public static boolean checkInput(char[][] crossword, int i, int j, char input) {

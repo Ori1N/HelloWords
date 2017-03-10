@@ -40,8 +40,6 @@ public class CrosswordActivity extends AppCompatActivity {
 
                 char c = crossword[i][j];
 
-
-
                 // if crossword unit contains entry
                 if (c != 0) {
                     ++mCharsAtCrossWord[getCharValue(c)];
@@ -132,10 +130,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
                     if (getDraggedChar() == mAnswer) {
                         View innerView = ((ViewGroup) v).getChildAt(0);
-                        Utils.showViewWithFadeIn(getApplicationContext(), innerView);
-                        SoundHandler.playWinSound(getBaseContext());
-                        --mCharsAtCrossWord[getCharValue(getDraggedChar())];
-                        RefreshKeyboard();
+                        onSuccess(innerView);
                         mAnswer = 0;
                     } else {
                         Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
@@ -150,6 +145,13 @@ public class CrosswordActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    private void onSuccess(View textView) {
+        Utils.showViewWithFadeIn(getApplicationContext(), textView);
+        SoundHandler.playWinSound(getBaseContext());
+        --mCharsAtCrossWord[getCharValue(getDraggedChar())];
+        RefreshKeyboard();
     }
 
     private void RefreshKeyboard() {
@@ -177,7 +179,4 @@ public class CrosswordActivity extends AppCompatActivity {
         }
     }
 
-    private int getAsciiValue(int c) {
-        return c + 65;
-    }
 }
