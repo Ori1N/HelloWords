@@ -57,8 +57,10 @@ public class CrosswordActivity extends AppCompatActivity {
 
         for (int i = 0; i < mKeyboardView.getChildCount(); i++) {
             ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
-            for (int j = 0; i < keyboardLine.getChildCount(); ++j) {
-                keyboardLine.getChildAt(j).setOnTouchListener(new MyTouchListener());
+            for (int j = 0; j < keyboardLine.getChildCount(); ++j) {
+//                if (keyboardLine.getChildAt(j) != null) {
+                    keyboardLine.getChildAt(j).setOnTouchListener(new MyTouchListener());
+//                }
             }
         }
 
