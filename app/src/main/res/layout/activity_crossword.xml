@@ -27,6 +27,8 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingStart="50dp"
             >
 
             <LinearLayout
@@ -266,8 +268,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/owl_1"
             android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"
-            android:minWidth="100dp"
+            android:minWidth="200dp"
+            android:minHeight="200dp"
             />
 
     </LinearLayout>
