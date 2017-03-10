@@ -42,6 +42,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
                 // if crossword unit contains entry
                 if (c != 0) {
+
                     ++mCharsAtCrossWord[getCharValue(c)];
                     // show it
                     getCrosswordUnit(i, j).setVisibility(View.VISIBLE);
@@ -56,9 +57,7 @@ public class CrosswordActivity extends AppCompatActivity {
         for (int i = 0; i < mKeyboardView.getChildCount(); i++) {
             ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
             for (int j = 0; j < keyboardLine.getChildCount(); ++j) {
-//                if (keyboardLine.getChildAt(j) != null) {
                     keyboardLine.getChildAt(j).setOnTouchListener(new MyTouchListener());
-//                }
             }
         }
 
@@ -86,7 +85,6 @@ public class CrosswordActivity extends AppCompatActivity {
     private final class MyTouchListener implements View.OnTouchListener {
 
         public boolean onTouch(View view, MotionEvent motionEvent) {
-//            Toast.makeText(getApplicationContext(), "Toast", Toast.LENGTH_LONG).show();
             mCurrentDrag = (TextView) view;
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
@@ -100,6 +98,7 @@ public class CrosswordActivity extends AppCompatActivity {
                 return false;
             }
         }
+
     }
 
     private class OnCrosswordUnitDragListener implements View.OnDragListener {
@@ -118,7 +117,6 @@ public class CrosswordActivity extends AppCompatActivity {
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
                     //    v.setBackgroundResource(R.drawable.shape_droptarget);
-                    // TOOD add animation to button - you are here.
                     break;
 
                 case DragEvent.ACTION_DRAG_EXITED:
