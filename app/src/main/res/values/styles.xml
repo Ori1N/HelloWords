@@ -27,6 +27,9 @@
         <item name="android:layout_width">25dp</item>
         <item name="android:background">@color/gray_light</item>
         <item name="android:layout_margin">5dp</item>
+        <item name="android:minWidth">25dp</item>
+        <item name="android:textSize">20sp</item>
+        <!--<item name=""-->
     </style>
 
     <style name="Keyboard_Button">
@@ -35,5 +38,13 @@
         <item name="android:minWidth">25dp</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <style name="Topic_Icon">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <!--<item name="android:padding">10dp</item>-->
+    </style>
+
 
 </resources>

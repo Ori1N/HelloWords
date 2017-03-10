@@ -12,10 +12,11 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CrosswordActivity_demo extends AppCompatActivity {
-
+    View mCurrentDrag = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +37,16 @@ public class CrosswordActivity_demo extends AppCompatActivity {
 
     }
     private final class MyTouchListener implements View.OnTouchListener {
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            Toast.makeText(getApplicationContext(), "Toast", Toast.LENGTH_LONG).show();
 
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+//            Toast.makeText(getApplicationContext(), "Toast", Toast.LENGTH_LONG).show();
+            mCurrentDrag = view;
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(data, shadowBuilder, view, 0);
 
-                view.setVisibility(View.INVISIBLE);
+              //  view.setVisibility(View.INVISIBLE);
                 return true;
             } else {
                 return false;
@@ -62,7 +64,7 @@ public class CrosswordActivity_demo extends AppCompatActivity {
                     // do nothing
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    v.setBackgroundResource(R.drawable.shape_droptarget);
+                //    v.setBackgroundResource(R.drawable.shape_droptarget);
                     // TOOD add animation to button - you are here.
                     break;
 
@@ -73,7 +75,13 @@ public class CrosswordActivity_demo extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
                     //Dropped, reassign View to ViewGroup
 
+                    TextView dest = (TextView) v;
+                    TextView src = (TextView) mCurrentDrag;
+                    dest.setText(src.getText());
+                    if (dest.getText().equals(src.getText())){
 
+                    }
+                    //SoundHandler.playWinSound(getBaseContext());
 
                     break;
 

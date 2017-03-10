@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="20dp"
         android:weightSum="2">
 
         <LinearLayout
@@ -20,54 +21,50 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:weightSum="3"
+            android:paddingTop="30dp"
+            android:paddingBottom="10dp"
             android:layout_weight="1">
 
             <ImageView
-
                 android:id="@+id/IV_image1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="false"
+                style="@style/Topic_Icon"
                 android:src="@drawable/transporticon"
-                android:layout_weight="1"/>
+               />
             <ImageView
                 android:id="@+id/IV_image2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                style="@style/Topic_Icon"
                 android:src="@drawable/fruiticon"
-                android:layout_weight="1"/>
+                />
             <ImageView
                 android:id="@+id/IV_image3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                style="@style/Topic_Icon"
                 android:src="@drawable/animalicon"
-                android:layout_weight="1"/>
+                />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:weightSum="3"
+            android:paddingBottom="30dp"
+            android:paddingTop="10dp"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/IV_image4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:src="@drawable/weathericon"
-                android:layout_weight="1"/>
+                style="@style/Topic_Icon"
+                />
             <ImageView
                 android:id="@+id/IV_image5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                style="@style/Topic_Icon"
                 android:src="@drawable/musicicon"
-                android:layout_weight="1"/>
+                />
             <ImageView
                 android:id="@+id/IV_image6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                style="@style/Topic_Icon"
                 android:src="@drawable/sporticon"
-                android:layout_weight="1"/>
+               />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
