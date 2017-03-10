@@ -15,7 +15,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
     private ViewGroup mCrosswordContainer;
     TextView mCurrentDrag = null;
-
+    int [] mCharsAtCrossWord = new int[26];
     //ViewGroup[][]  mCrosswordUnits;
 
     @Override
@@ -24,6 +24,8 @@ public class CrosswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crossword);
 
         initializeCrosswordViews(CrosswordUtils.getCrossword());
+
+
     }
 
     private void initializeCrosswordViews(char[][] crossword) {
@@ -35,6 +37,9 @@ public class CrosswordActivity extends AppCompatActivity {
             for (int j = 0; j < crossword[0].length; j++) {
 
                 char c = crossword[i][j];
+
+                ++mCharsAtCrossWord[getCharValue(c)];
+
 
                 // if crossword unit contains entry
                 if (c != 0) {
@@ -52,7 +57,11 @@ public class CrosswordActivity extends AppCompatActivity {
         for (int i = 0; i < keysGrid.getChildCount(); ++i){
             keysGrid.getChildAt(i).setOnTouchListener(new MyTouchListener());
         }
+
+        RefreshKeyboard();
     }
+
+
 
 
     private ViewGroup getCrosswordUnit(int i, int j) {
@@ -79,6 +88,7 @@ public class CrosswordActivity extends AppCompatActivity {
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(data, shadowBuilder, view, 0);
+                TextView tv = (TextView) view;
 
                 //  view.setVisibility(View.INVISIBLE);
                 return true;
@@ -118,6 +128,9 @@ public class CrosswordActivity extends AppCompatActivity {
                         View innerView = ((ViewGroup) v).getChildAt(0);
                         Utils.showViewWithFadeIn(getApplicationContext(), innerView);
                         SoundHandler.playWinSound(getBaseContext());
+                        --mCharsAtCrossWord[getCharValue(getDraggedChar())];
+                        RefreshKeyboard();
+                        mAnswer = 0;
                     } else {
                         Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
                     }
@@ -133,4 +146,31 @@ public class CrosswordActivity extends AppCompatActivity {
         }
     }
 
+    private void RefreshKeyboard() {
+        GridLayout keysGrid = (GridLayout) findViewById(R.id.gl_keys);
+        for (int i = 0; i < keysGrid.getChildCount(); ++i){
+
+            TextView keyTextView = (TextView) keysGrid.getChildAt(i);
+            if (mCharsAtCrossWord[getCharValue(keyTextView.getText().charAt(0))] > 0 ) {
+                keyTextView.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                keyTextView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private int getCharValue(char c) {
+        if (Character.isLowerCase(c)){
+            return c - 97;
+        }
+        else{
+            return c - 65;
+        }
+    }
+
+    private int getAsciiValue(int c) {
+        return c + 65;
+    }
 }
