@@ -1,5 +1,6 @@
 package com.hackathon.hellowords;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -21,7 +22,13 @@ public class SplashScreen extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         loadAnimation();
-        proceed();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                proceed();
+            }
+        }, 5000);
     }
 
     private void loadAnimation() {
