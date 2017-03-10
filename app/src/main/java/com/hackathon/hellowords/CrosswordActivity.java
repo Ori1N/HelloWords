@@ -138,8 +138,9 @@ public class CrosswordActivity extends AppCompatActivity {
 
 
     @OnLongClick(R.id.crossword_guide)
-    public void onOwlLongClick() {
+    public boolean onOwlLongClick(View v) {
         showHint();
+        return true;
     }
 
     private boolean mHintShown = false;
