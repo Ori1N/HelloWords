@@ -24,6 +24,17 @@ public class CrosswordActivity extends AppCompatActivity {
     ViewGroup mKeyboardView;
     Pair words;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+       SoundHandler.startBgMusic();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SoundHandler.stopBgMusic();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -57,4 +57,11 @@ public class SoundHandler {
         wordCompleted.start();
     }
 
+    public static void stopBgMusic() {
+
+    }
+
+    public static void startBgMusic() {
+
+    }
 }
