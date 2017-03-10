@@ -2,11 +2,13 @@ package com.hackathon.hellowords;
 
 import android.content.ClipData;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +18,13 @@ public class CrosswordActivity extends AppCompatActivity {
 
 
     private ViewGroup mCrosswordContainer;
+    ViewGroup mKeyboardView;
     TextView mCurrentDrag = null;
+    ImageView mOwlGuide;
 
     int [] mCharsAtCrossWord = new int[Constants.AlphabetSize];
     CellState [][] states;
     char[][] crossword;
-    ViewGroup mKeyboardView;
     Pair words;
 
 
@@ -39,13 +42,15 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
     private void initializeCrosswordViews() {
-        mKeyboardView  = (ViewGroup) findViewById((R.id.gl_keys));
 
+        // find views
         mCrosswordContainer = (ViewGroup) findViewById(R.id.crossword_container);
-        //mCrosswordUnits = new ViewGroup[crossword.length][crossword[0].length];
+        mKeyboardView  = (ViewGroup) findViewById((R.id.gl_keys));
+        mOwlGuide = (ImageView) findViewById(R.id.crossword_guide);
+
 
         states = new CellState[crossword.length][crossword[0].length];
-        Toast.makeText(getApplicationContext(), "i size:"+crossword.length +" j size:"+crossword[0].length, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "i size:"+crossword.length +" j size:"+crossword[0].length, Toast.LENGTH_SHORT).show();
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[0].length; j++) {
 
@@ -218,6 +223,22 @@ public class CrosswordActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
 
         ++words.completed;
+
+        // evolve owl icon
+
+        @DrawableRes int newOwlIcon = -1;
+
+        switch (words.completed) {
+            case 1: newOwlIcon = R.drawable.owl_2; break;
+            case 2: newOwlIcon = R.drawable.owl_3; break;
+            case 3: newOwlIcon = R.drawable.owl_4; break;
+            case 4: newOwlIcon = R.drawable.owl_5; break;
+        }
+
+        if (newOwlIcon != -1) {
+            mOwlGuide.setImageResource(newOwlIcon);
+        }
+
     }
     private Pair checkCol(int i, int j) {
         int uncompleted = 0;
