@@ -28,19 +28,19 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="false"
-                android:src="@drawable/apple"
+                android:src="@drawable/transporticon"
                 android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/IV_image2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/apple"
+                android:src="@drawable/fruiticon"
                 android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/IV_image3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/apple"
+                android:src="@drawable/animalicon"
                 android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
@@ -54,19 +54,19 @@
                 android:id="@+id/IV_image4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/apple"
+                android:src="@drawable/weathericon"
                 android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/IV_image5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/apple"
+                android:src="@drawable/musicicon"
                 android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/IV_image6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/apple"
+                android:src="@drawable/sporticon"
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>

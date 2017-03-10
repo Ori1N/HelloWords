@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class CrosswordActivity_demo extends AppCompatActivity {
 
@@ -23,18 +24,21 @@ public class CrosswordActivity_demo extends AppCompatActivity {
        // setSupportActionBar(toolbar);
 
         GridLayout keysGrid = (GridLayout) findViewById(R.id.gl_keys);
-        for (int i = 0; i > keysGrid.getChildCount(); ++i){
+        for (int i = 0; i < keysGrid.getChildCount(); ++i){
             keysGrid.getChildAt(i).setOnTouchListener(new MyTouchListener());
         }
 
         GridLayout crossWordGrid = (GridLayout) findViewById(R.id.crossword_container);
-        for (int i = 0; i > crossWordGrid.getChildCount(); ++i){
+        for (int i = 0; i < crossWordGrid.getChildCount(); ++i){
             crossWordGrid.getChildAt(i).setOnDragListener(new MyDragListener());
         }
+
 
     }
     private final class MyTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
+            Toast.makeText(getApplicationContext(), "Toast", Toast.LENGTH_LONG).show();
+
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
@@ -50,9 +54,6 @@ public class CrosswordActivity_demo extends AppCompatActivity {
 
     class MyDragListener implements View.OnDragListener {
 
-       // Drawable enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
-       // Drawable normalShape = getResources().getDrawable(R.drawable.shape);
-
         @Override
         public boolean onDrag(View v, DragEvent event) {
             int action = event.getAction();
@@ -61,22 +62,23 @@ public class CrosswordActivity_demo extends AppCompatActivity {
                     // do nothing
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
-             //       v.setBackgroundDrawable(enterShape);
+                    v.setBackgroundResource(R.drawable.shape_droptarget);
+                    // TOOD add animation to button - you are here.
                     break;
+
                 case DragEvent.ACTION_DRAG_EXITED:
-           //         v.setBackgroundDrawable(normalShape);
+                    //v.setBackgroundResource(R.drawable.shapes);
                     break;
+
                 case DragEvent.ACTION_DROP:
-                    // Dropped, reassign View to ViewGroup
-                    View view = (View) event.getLocalState();
-                    ViewGroup owner = (ViewGroup) view.getParent();
-                    owner.removeView(view);
-                    LinearLayout container = (LinearLayout) v;
-                    container.addView(view);
-                    view.setVisibility(View.VISIBLE);
+                    //Dropped, reassign View to ViewGroup
+
+
+
                     break;
+
                 case DragEvent.ACTION_DRAG_ENDED:
-             //       v.setBackgroundDrawable(normalShape);
+                  //  v.setBackgroundResource(R.drawable.shapes);
                 default:
                     break;
             }
