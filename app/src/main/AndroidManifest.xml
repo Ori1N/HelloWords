@@ -34,13 +34,6 @@
             android:screenOrientation="landscape">
         </activity>
 
-        <activity
-            android:name=".CrosswordActivity_demo"
-            android:label="@string/title_activity_topic"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape">
-        </activity>
-
     </application>
 
 </manifest>
