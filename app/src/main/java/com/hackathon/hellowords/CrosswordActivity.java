@@ -30,13 +30,13 @@ public class CrosswordActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-       SoundHandler.startBgMusic();
+        SoundHandler.startBgMusic(getApplicationContext());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        SoundHandler.stopBgMusic();
+        SoundHandler.stopBgMusic(getApplicationContext());
     }
 
     @Override
