@@ -40,7 +40,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
                 char c = crossword[i][j];
 
-                ++mCharsAtCrossWord[getCharValue(c)];
+            //    ++mCharsAtCrossWord[getCharValue(c)];
 
 
                 // if crossword unit contains entry
@@ -62,7 +62,7 @@ public class CrosswordActivity extends AppCompatActivity {
             }
         }
 
-        RefreshKeyboard();
+      //  RefreshKeyboard();
     }
 
 
@@ -132,8 +132,8 @@ public class CrosswordActivity extends AppCompatActivity {
                         View innerView = ((ViewGroup) v).getChildAt(0);
                         Utils.showViewWithFadeIn(getApplicationContext(), innerView);
                         SoundHandler.playWinSound(getBaseContext());
-                        --mCharsAtCrossWord[getCharValue(getDraggedChar())];
-                        RefreshKeyboard();
+                  //      --mCharsAtCrossWord[getCharValue(getDraggedChar())];
+                  //      RefreshKeyboard();
                         mAnswer = 0;
                     } else {
                         Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
