@@ -99,7 +99,7 @@ public class CrosswordActivity extends AppCompatActivity {
             }
         }
 
-        RefreshKeyboard();
+        refreshKeyboard();
 
     }
 
@@ -286,12 +286,12 @@ public class CrosswordActivity extends AppCompatActivity {
             mOwlGuide.setImageResource(newOwlIcon);
         }
         if (words.completed == words.totalToComplete){
-            FinishedCrossword();
+            finishedCrossword();
         }
 
     }
 
-    private void FinishedCrossword(){
+    private void finishedCrossword(){
         Utils.launchActivity(this, CongratulationsActivity.class);
         finish();
     }
@@ -331,14 +331,14 @@ public class CrosswordActivity extends AppCompatActivity {
         Utils.showViewWithFadeIn(getApplicationContext(), textView);
         SoundHandler.playWinSound(getBaseContext());
         --mCharsAtCrossWord[getCharValue(getDraggedChar())];
-        RefreshStates();
-        RefreshKeyboard();
+        refreshStates();
+        refreshKeyboard();
     }
 
-    private void RefreshStates() { // check for
+    private void refreshStates() { // check for
     }
 
-    private void RefreshKeyboard() {
+    private void refreshKeyboard() {
         for (int i = 0; i < mKeyboardView.getChildCount(); ++i){
 
             ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
