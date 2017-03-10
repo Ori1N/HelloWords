@@ -61,6 +61,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
 
         states = new CellState[crossword.length][crossword[0].length];
+//        Toasty.success(this, "Success!", Toast.LENGTH_SHORT, true).show();
 //        Toast.makeText(getApplicationContext(), "i size:"+crossword.length +" j size:"+crossword[0].length, Toast.LENGTH_SHORT).show();
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[0].length; j++) {
@@ -216,7 +217,7 @@ public class CrosswordActivity extends AppCompatActivity {
                         onSuccess(innerView);
                         mAnswer = 0;
                     } else {
-                        Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
                     }
 
                     break;
@@ -231,7 +232,7 @@ public class CrosswordActivity extends AppCompatActivity {
 
     }
     private void WordCompleted(){
-        Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
 
         ++words.completed;
 
