@@ -27,6 +27,17 @@ public class CrosswordActivity extends AppCompatActivity {
     char[][] crossword;
     Pair words;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+       SoundHandler.startBgMusic();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SoundHandler.stopBgMusic();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
