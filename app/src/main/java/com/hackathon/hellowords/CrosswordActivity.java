@@ -244,7 +244,7 @@ public class CrosswordActivity extends AppCompatActivity {
                             WordCompleted();
                         }
 
-                        if (( rowResult.completed > 1)  && (rowResult.totalToComplete == 1))  { // check there is exactly
+                        if (( rowResult.completed > 4)  && (rowResult.totalToComplete == 1))  { // check there is exactly
                             WordCompleted();
                         }
                         states[i][j] = CellState.COMPLETED; // set state to completed

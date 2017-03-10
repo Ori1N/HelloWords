@@ -29,7 +29,12 @@
 
         <activity
             android:name=".CrosswordActivity"
-            android:label="@string/title_activity_topic"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity
+            android:name=".CongratulationsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape">
         </activity>
