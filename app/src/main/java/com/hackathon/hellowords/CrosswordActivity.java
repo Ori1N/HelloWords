@@ -63,6 +63,10 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
 
+    private void onCrosswordIconClick() {
+        // todo!
+    }
+
 
 
     private ViewGroup getCrosswordUnit(int i, int j) {
