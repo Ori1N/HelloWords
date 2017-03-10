@@ -34,17 +34,12 @@ public class CrosswordActivity extends AppCompatActivity {
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[0].length; j++) {
 
-                ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
-                //mCrosswordUnits[i][j] = (ViewGroup) rowContainer.getChildAt(j);
-
                 char c = crossword[i][j];
 
-                // if crossword unit doesn't contain entry
-                if (c == 0) {
-                    // hide crossword unit
-                    getCrosswordUnit(i, j).setVisibility(View.INVISIBLE);
-                    // else
-                } else {
+                // if crossword unit contains entry
+                if (c != 0) {
+                    // show it
+                    getCrosswordUnit(i, j).setVisibility(View.VISIBLE);
                     // set onDragListener with the right character
                     getCrosswordUnit(i, j).setOnDragListener(new OnCrosswordUnitDragListener(c));
                     // set text to the right answer
@@ -52,7 +47,6 @@ public class CrosswordActivity extends AppCompatActivity {
                 }
             }
         }
-
 
         GridLayout keysGrid = (GridLayout) findViewById(R.id.gl_keys);
         for (int i = 0; i < keysGrid.getChildCount(); ++i){
@@ -94,7 +88,7 @@ public class CrosswordActivity extends AppCompatActivity {
         }
     }
 
-    class OnCrosswordUnitDragListener implements View.OnDragListener {
+    private class OnCrosswordUnitDragListener implements View.OnDragListener {
 
         private char mAnswer;
         public OnCrosswordUnitDragListener(char answer) {
