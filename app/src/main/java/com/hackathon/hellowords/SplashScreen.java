@@ -3,13 +3,11 @@ package com.hackathon.hellowords;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 public class SplashScreen extends AppCompatActivity {
-
-    private static final boolean GO_TO_CROSSWORD = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +30,16 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void loadAnimation() {
-//        Glide.with(getApplicationContext())
-//                .load(R.drawable.animalicon)
+        ImageView image = (ImageView) findViewById(R.id.splash_image);
+        Glide.with(getApplicationContext())
+                .load(R.drawable.splashed)
+                .asGif()
+                .placeholder(R.drawable.splashed_frozen)
+                .into(image);
     }
 
     private void proceed() {
-        if (GO_TO_CROSSWORD) {
-            Utils.launchActivity(this, CrosswordActivity.class);
-        } else {
-            Utils.launchActivity(this, TopicActivity.class);
-        }
+        Utils.launchActivity(this, TopicActivity.class);
         finish();
     }
 

@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="7"
-    tools:context="com.hackathon.hellowords.CrosswordActivity">
+    tools:context="com.hackathon.hellowords.CrosswordActivity"
+    android:background="@drawable/game_screen_bg"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -146,125 +148,136 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_weight="3"
         >
 
-        <GridLayout
-            android:id="@+id/gl_keys"
+        <LinearLayout
+            android:id="@+id/gl_keys_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="13"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            >
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="A"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="B"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="C"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="D"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="E"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="F"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="G"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="H"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="I"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="J"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="K"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="L"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="M"/>
+            </LinearLayout>
 
-            <Button
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center"
+            >
+
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="N"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="O"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="P"
                 />
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="Q"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="R"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="S"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="T"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="U"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="V"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="W"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="X"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="Y"/>
 
-            <Button
+            <TextView
                 style="@style/Keyboard_Button"
                 android:text="Z" />
 
-        </GridLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
