@@ -19,7 +19,7 @@ public class TopicActivity extends AppCompatActivity {
             topicLayout.getChildAt(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utils.launchActivity(TopicActivity.this, CrosswordActivity_demo.class);
+                    Utils.launchActivity(TopicActivity.this, CrosswordActivity.class);
                 }
             });
         }
