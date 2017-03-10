@@ -26,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
+            android:paddingRight="75dp"
+            android:paddingEnd="75dp"
             >
 
             <LinearLayout
@@ -37,19 +39,33 @@
                 >
 
                 <include layout="@layout/crossword_unit" />
-                <ImageView
+                <FrameLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/crossword_bear"
                     android:layout_weight="1"
-                    />
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/crossword_bear"
+                        />
+
+                </FrameLayout>
                 <include layout="@layout/crossword_unit" />
-                <ImageView
+                <FrameLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/crossword_zebra"
                     android:layout_weight="1"
-                    />
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/crossword_zebra"
+                        android:layout_gravity="center"
+                        />
+
+                </FrameLayout>
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
@@ -74,20 +90,34 @@
                          android:visibility="visible" />
                 <include layout="@layout/crossword_unit" />
 
-                <ImageView
+                <FrameLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/crossword_hare"
                     android:layout_weight="1"
-                    />
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/crossword_hare"
+                        android:layout_gravity="center"
+                        />
+
+                </FrameLayout>
                 <include layout="@layout/crossword_unit" />
                 <include layout="@layout/crossword_unit" />
-                <ImageView
+                <FrameLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/crossword_tiger"
                     android:layout_weight="1"
-                    />
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/crossword_tiger"
+                        android:layout_gravity="center"
+                        />
+
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -99,12 +129,19 @@
                 android:layout_gravity="center_horizontal"
                 >
 
-                <ImageView
+                <FrameLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/crossword_elephant"
                     android:layout_weight="1"
-                    />
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/crossword_elephant"
+                        />
+
+                </FrameLayout>
 
                 <include layout="@layout/crossword_unit"
                          android:visibility="visible" />
