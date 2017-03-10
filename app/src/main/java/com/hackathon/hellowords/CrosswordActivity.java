@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.OnClick;
+
 public class CrosswordActivity extends AppCompatActivity {
 
     private ViewGroup mCrosswordContainer;
@@ -60,11 +62,40 @@ public class CrosswordActivity extends AppCompatActivity {
         }
 
         RefreshKeyboard();
+
     }
 
 
-    private void onCrosswordIconClick() {
-        // todo!
+    @OnClick({
+            R.id.crossword_icon_elephant,
+            R.id.crossword_icon_bear,
+            R.id.crossword_icon_zebra,
+            R.id.crossword_icon_hare,
+            R.id.crossword_icon_tiger
+    })
+    public void onCrosswordIconClick(View v) {
+        CrosswordAnimalType animalType = null;
+
+        switch (v.getId()) {
+
+            case R.id.crossword_icon_elephant:
+                animalType = CrosswordAnimalType.ELEPHANT; break;
+
+            case R.id.crossword_icon_bear:
+                animalType = CrosswordAnimalType.BEAR; break;
+
+            case R.id.crossword_icon_zebra:
+                animalType = CrosswordAnimalType.ZEBRA; break;
+
+            case R.id.crossword_icon_hare:
+                animalType = CrosswordAnimalType.HARE; break;
+
+            case R.id.crossword_icon_tiger:
+                animalType = CrosswordAnimalType.TIGER; break;
+
+        }
+
+        SoundHandler.playAnimalWord(getApplicationContext(), animalType);
     }
 
 
