@@ -14,26 +14,38 @@ import butterknife.OnClick;
 
 public class CrosswordActivity extends AppCompatActivity {
 
+
     private ViewGroup mCrosswordContainer;
     TextView mCurrentDrag = null;
-    int [] mCharsAtCrossWord = new int[26];
 
+    int [] mCharsAtCrossWord = new int[Constants.AlphabetSize];
+    CellState [][] states;
+    char[][] crossword;
     ViewGroup mKeyboardView;
+    Pair words;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crossword);
 
-        initializeCrosswordViews(CrosswordUtils.getCrosswordMatrix());
+        this.crossword = CrosswordUtils.getCrosswordMatrix();
+        this.words = new Pair(0, CrosswordUtils.getWords());
+
+        initializeCrosswordViews();
+
+
     }
 
-    private void initializeCrosswordViews(char[][] crossword) {
-        mKeyboardView = (ViewGroup) findViewById((R.id.gl_keys));
+    private void initializeCrosswordViews() {
+        mKeyboardView  = (ViewGroup) findViewById((R.id.gl_keys));
 
         mCrosswordContainer = (ViewGroup) findViewById(R.id.crossword_container);
         //mCrosswordUnits = new ViewGroup[crossword.length][crossword[0].length];
 
+        states = new CellState[crossword.length][crossword[0].length];
+        Toast.makeText(getApplicationContext(), "i size:"+crossword.length +" j size:"+crossword[0].length, Toast.LENGTH_SHORT).show();
         for (int i = 0; i < crossword.length; i++) {
             for (int j = 0; j < crossword[0].length; j++) {
 
@@ -43,13 +55,21 @@ public class CrosswordActivity extends AppCompatActivity {
                 // if crossword unit contains entry
                 if (c != 0) {
 
+                    // TODO update states
+                    states[i][j] = CellState.NOT_COMPLETED;
+
+                    // TODO remove update counters
                     ++mCharsAtCrossWord[getCharValue(c)];
+
                     // show it
                     getCrosswordUnit(viewI, viewJ).setVisibility(View.VISIBLE);
                     // set onDragListener with the right character
-                    getCrosswordUnit(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(c));
+                    getCrosswordUnit(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(i, j));
                     // set text to the right answer
                     getCrosswordUnitText(viewI, viewJ).setText(String.valueOf(c));
+                }
+                else{
+                    states[i][j] = CellState.EMPTY;
                 }
             }
         }
@@ -135,10 +155,14 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
     private class OnCrosswordUnitDragListener implements View.OnDragListener {
-
         private char mAnswer;
-        public OnCrosswordUnitDragListener(char answer) {
-            mAnswer = answer;
+        private int i;
+        private int j;
+
+        public OnCrosswordUnitDragListener(int i, int j) {
+            mAnswer = crossword[i][j];
+            this.i = i;
+            this.j = j;
         }
 
         @Override
@@ -159,7 +183,19 @@ public class CrosswordActivity extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
                     //Dropped, reassign View to ViewGroup
 
-                    if (getDraggedChar() == mAnswer) {
+                    if (getDraggedChar() == mAnswer) { // letter fits
+
+                        Pair rowResult = checkRow(i,j);
+                        Pair colResult = checkCol(i,j);
+
+                        if (( colResult.completed > 1)  && (colResult.uncompleted == 1))  { // check there is exactly
+                            WordCompleted();
+                        }
+
+                        if (( rowResult.completed > 1)  && (rowResult.uncompleted == 1))  { // check there is exactly
+                            WordCompleted();
+                        }
+                        states[i][j] = CellState.COMPLETED; // set state to completed
                         View innerView = ((ViewGroup) v).getChildAt(0);
                         onSuccess(innerView);
                         mAnswer = 0;
@@ -176,13 +212,53 @@ public class CrosswordActivity extends AppCompatActivity {
             }
             return true;
         }
+
     }
+    private void WordCompleted(){
+        Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
+
+        ++words.completed;
+    }
+    private Pair checkCol(int i, int j) {
+        int uncompleted = 0;
+        int completed = 0;
+        for(int row = 0; row < states.length; ++row){
+            if (states[row][j] == CellState.NOT_COMPLETED){
+                ++uncompleted;
+            }
+            if (states[row][j] == CellState.COMPLETED){
+                ++completed;
+            }
+        }
+
+        return new Pair(completed,uncompleted);
+    }
+
+    private Pair checkRow(int i, int j) {
+        int uncompleted = 0;
+        int completed = 0;
+
+        for(int col = 0; col < states[0].length; ++col){
+            if (states[i][col] == CellState.NOT_COMPLETED){
+                ++uncompleted;
+            }
+            if (states[i][col] == CellState.COMPLETED){
+                ++completed;
+            }
+        }
+        return new Pair(completed,uncompleted);
+    }
+
 
     private void onSuccess(View textView) {
         Utils.showViewWithFadeIn(getApplicationContext(), textView);
         SoundHandler.playWinSound(getBaseContext());
         --mCharsAtCrossWord[getCharValue(getDraggedChar())];
+        RefreshStates();
         RefreshKeyboard();
+    }
+
+    private void RefreshStates() { // check for
     }
 
     private void RefreshKeyboard() {

@@ -38,6 +38,10 @@ public class CrosswordUtils {
         };
 
     }
+    public static int getWords() {
+        return 5;
+
+    }
 
     public static @DrawableRes int getCrosswordIcon( ) {
         return -1;
