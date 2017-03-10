@@ -8,10 +8,23 @@ import android.support.annotation.DrawableRes;
 
 public class CrosswordUtils {
 
-    public static char[][] getCrossword() {
+//    public static class CrosswordString {
+//
+//        private String mStr;
+//        private @DrawableRes int mDrawable;
+//
+//        public CrosswordString(String str, @DrawableRes int entryIcon) {
+//            mStr = str;
+//            mDrawable = entryIcon;
+//        }
+//
+//    }
+
+
+    public static char[][] getCrosswordMatrix() {
         return new char[][] {
-                { 'B',  0,      'Z',    0,      0,      0,      0,      0 },
-                { 'E',  'L',    'E',    'P',    'H',    'A',    'N',    'T' },
+                { 'B',  0,      'Z',    0,      0,      0,      0,     0 },
+                { 'E',  'L',    'E',    'P',    'H',    'A',    'N',  'T' },
                 { 'A',  0,      'B',    0,      'A',    0,      0,    'I' },
                 { 'R',  0,      'R',    0,      'R',    0,      0,    'G' },
                 { 0,    0,      'A',    0,      'E',    0,      0,    'E' },
@@ -25,8 +38,12 @@ public class CrosswordUtils {
         };
 
     }
+    public static int getWords() {
+        return 5;
 
-    public static @DrawableRes int getCrosswordIcon() {
+    }
+
+    public static @DrawableRes int getCrosswordIcon( ) {
         return -1;
     }
 

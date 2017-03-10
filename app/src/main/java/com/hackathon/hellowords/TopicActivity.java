@@ -11,8 +11,6 @@ public class TopicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
-     /*   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
         LinearLayout topicLayout = (LinearLayout) findViewById(R.id.topic_container);
 
         for (int i=0; i< topicLayout.getChildCount(); ++i){
