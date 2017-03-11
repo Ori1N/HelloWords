@@ -10,7 +10,10 @@ import android.support.annotation.RawRes;
 
 public class SoundHandler {
 
-    static MediaPlayer backgroundMusic;
+    static MediaPlayer mBackgroundMusic;
+
+    static MediaPlayer mClapsSound;
+
     public static void playLoseSound(Context context) {
         MediaPlayer loseSound = MediaPlayer.create(context, R.raw.lose_sound);
         loseSound.start();
@@ -57,13 +60,22 @@ public class SoundHandler {
         wordCompleted.start();
     }
 
+    public static void startsCheers(Context context) {
+        MediaPlayer wordCompleted = MediaPlayer.create(context, R.raw.clapping);
+        wordCompleted.start();
+    }
+
+    public static void stopCheers(Context context) {
+        mBackgroundMusic.stop();
+    }
+
     public static void startBgMusic(Context context) {
-        backgroundMusic = MediaPlayer.create(context, R.raw.bg_music);
-        backgroundMusic.start();
+        mBackgroundMusic = MediaPlayer.create(context, R.raw.bg_music);
+        mBackgroundMusic.start();
     }
 
     public static void stopBgMusic(Context context) {
-        backgroundMusic.stop();
+        mBackgroundMusic.stop();
     }
 
 }
