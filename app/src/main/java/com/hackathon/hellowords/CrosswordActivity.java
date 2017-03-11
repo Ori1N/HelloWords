@@ -73,11 +73,11 @@ public class CrosswordActivity extends AppCompatActivity {
                     ++mCharsAtCrossWord[getCharValue(c)];
 
                     // show it
-                    getCrosswordUnit(viewI, viewJ).setVisibility(View.VISIBLE);
+                    getCrosswordCellView(viewI, viewJ).setVisibility(View.VISIBLE);
                     // set onDragListener with the right character
-                    getCrosswordUnit(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(i, j));
+                    getCrosswordCellView(viewI, viewJ).setOnDragListener(new OnCrosswordUnitDragListener(i, j));
                     // set text to the right answer
-                    getCrosswordUnitText(viewI, viewJ).setText(String.valueOf(c));
+                    getCrosswordCellTextView(viewI, viewJ).setText(String.valueOf(c));
                 }
                 else{
                     states[i][j] = CellState.EMPTY;
@@ -102,40 +102,27 @@ public class CrosswordActivity extends AppCompatActivity {
     private void onRightCharacterSelected(View textView, int i, int j) {
         Utils.showViewWithFadeIn(getApplicationContext(), textView);
         SoundHandler.playWinSound(getBaseContext());
-        checkForWordCompleted(i, j);
+        refreshStates(i, j);
         refreshKeyboard();
     }
-    private void checkForWordCompleted(int i, int j) {
-        Pair rowResult = checkRow(i,j);
-        Pair colResult = checkCol(i,j);
 
-        if (( colResult.completed > 1)  && (colResult.totalToComplete == 1))  { // check there is exactly
-            onWordCompleted();
-        }
+    private void onWordCompleted(int i, int j){
 
-        if (( rowResult.completed > 4)  && (rowResult.totalToComplete == 1))  { // check there is exactly
-            onWordCompleted();
-        }
-        states[i][j] = CellState.COMPLETED; // set state to completed
-    }
-
-    private void onWordCompleted(){
+        // update members
         ++words.completed;
 
         // evolve owl icon
-
         @DrawableRes int newOwlIcon = -1;
-
         switch (words.completed) {
             case 1: newOwlIcon = R.drawable.owl_2; break;
             case 2: newOwlIcon = R.drawable.owl_3; break;
             case 3: newOwlIcon = R.drawable.owl_4; break;
             case 4: newOwlIcon = R.drawable.owl_5; break;
         }
-
         if (newOwlIcon != -1) {
             mOwlGuide.setImageResource(newOwlIcon);
         }
+
         if (words.completed == words.totalToComplete){
             onFinishedCrossword();
         }
@@ -146,6 +133,7 @@ public class CrosswordActivity extends AppCompatActivity {
         Utils.launchActivity(this, CongratulationsActivity.class);
         finish();
     }
+
 
     private final class MyTouchListener implements View.OnTouchListener {
 
@@ -216,6 +204,109 @@ public class CrosswordActivity extends AppCompatActivity {
 
     }
 
+
+    private void refreshStates(int i, int j) {
+        if (checkIfWordWasCompleted(i, j)) {
+            onWordCompleted(i, j);
+        }
+
+        // refresh state
+        states[i][j] = CellState.COMPLETED;
+    }
+
+
+    private boolean checkIfWordWasCompleted(int i, int j) {
+        final int MIN_WORD_LENGTH = 3;
+
+        // check selected cell column
+        final int maxI = states.length;
+
+        int indexForwardI = i;
+        boolean missingForwardI = false;
+
+        while (++indexForwardI < maxI) {
+            CellState cellState = states[indexForwardI][j];
+
+            if (cellState == CellState.EMPTY) {
+                // got to word end, exit loop
+                break;
+
+            } else if (cellState == CellState.NOT_COMPLETED) {
+                // word not completed, mark flag and exit loop
+                missingForwardI = true;
+                break;
+            }
+        }
+
+        int indexBackwardI = i;
+        boolean missingBackwardI = false;
+
+        while (--indexBackwardI >= 0) {
+            CellState cellState = states[indexBackwardI][j];
+
+            if (cellState == CellState.EMPTY) {
+                // got to word end, exit loop
+                break;
+
+            } else if (cellState == CellState.NOT_COMPLETED) {
+                // word not completed, mark flag and exit loop
+                missingBackwardI = true;
+                break;
+            }
+        }
+
+        int countI = indexForwardI - (indexBackwardI + 1);
+        if (countI >= MIN_WORD_LENGTH && !missingForwardI && !missingBackwardI) {
+            return true;
+        }
+
+
+        // check selected cell row
+        final int maxJ = states[0].length;
+
+        // check forward
+        int indexForwardJ = j;
+        boolean missingForwardJ = false;
+
+        while (++indexForwardJ < maxJ) {
+            CellState cellState = states[i][indexForwardJ];
+
+            if (cellState == CellState.EMPTY) {
+                // got to word end, exit loop
+                break;
+
+            } else if (cellState == CellState.NOT_COMPLETED) {
+                // word not completed, mark flag and exit loop
+                missingForwardJ = true;
+                break;
+            }
+        }
+
+        int indexBackwardJ = j;
+        boolean missingBackwardJ = false;
+
+        while (--indexBackwardJ >= 0) {
+            CellState cellState = states[i][indexBackwardJ];
+
+            if (cellState == CellState.EMPTY) {
+                // got to word end, exit loop
+                break;
+
+            } else if (cellState == CellState.NOT_COMPLETED) {
+                // word not completed, mark flag and exit loop
+                missingBackwardJ = true;
+                break;
+            }
+        }
+
+        int countJ = indexForwardJ - (indexBackwardJ + 1);
+        if (countJ >= MIN_WORD_LENGTH && !missingForwardJ && !missingBackwardJ) {
+            return true;
+        }
+
+        return false;
+    }
+
     private void refreshKeyboard() {
 
         // update characters-counter
@@ -241,39 +332,6 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
 
-    private Pair checkCol(int i, int j) {
-        int uncompleted = 0;
-        int completed = 0;
-        for(int row = 0; row < states.length; ++row){
-            if (states[row][j] == CellState.NOT_COMPLETED){
-                ++uncompleted;
-            }
-            if (states[row][j] == CellState.COMPLETED){
-                ++completed;
-            }
-        }
-
-        return new Pair(completed,uncompleted);
-    }
-
-    private Pair checkRow(int i, int j) {
-        int uncompleted = 0;
-        int completed = 0;
-
-        for(int col = 0; col < states[0].length; ++col){
-            if (states[i][col] == CellState.NOT_COMPLETED){
-                ++uncompleted;
-            }
-            if (states[i][col] == CellState.COMPLETED){
-                ++completed;
-            }
-        }
-        return new Pair(completed,uncompleted);
-    }
-
-
-
-
     private int getCharValue(char c) {
         if (Character.isLowerCase(c)){
             return c - 97;
@@ -286,21 +344,19 @@ public class CrosswordActivity extends AppCompatActivity {
 
     // views utils
 
-    private ViewGroup getCrosswordUnit(int i, int j) {
+    private ViewGroup getCrosswordCellView(int i, int j) {
         ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
         return (ViewGroup) rowContainer.getChildAt(j);
     }
 
-    private TextView getCrosswordUnitText(int i, int j) {
-        return (TextView) getCrosswordUnit(i, j).getChildAt(0);
+    private TextView getCrosswordCellTextView(int i, int j) {
+        return (TextView) getCrosswordCellView(i, j).getChildAt(0);
     }
 
     private char getDraggedChar() {
         if (mCurrentDrag == null) return 0;
         return mCurrentDrag.getText().charAt(0);
     }
-
-
 
 
 
