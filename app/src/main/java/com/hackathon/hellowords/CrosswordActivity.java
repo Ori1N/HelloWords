@@ -214,7 +214,6 @@ public class CrosswordActivity extends AppCompatActivity {
         states[i][j] = CellState.COMPLETED;
     }
 
-
     private boolean checkIfWordWasCompleted(int i, int j) {
         final int MIN_WORD_LENGTH = 3;
 
