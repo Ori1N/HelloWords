@@ -29,17 +29,8 @@ public class CrosswordActivity extends AppCompatActivity {
     char[][] crossword;
     Pair words;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        SoundHandler.startBgMusic(getApplicationContext());
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        SoundHandler.stopBgMusic(getApplicationContext());
-    }
+    /* Initialization ------------------- */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +67,6 @@ public class CrosswordActivity extends AppCompatActivity {
                 // if crossword unit contains entry
                 if (c != 0) {
 
-                    // TODO update states
                     states[i][j] = CellState.NOT_COMPLETED;
 
                     // TODO remove update counters
@@ -102,93 +92,60 @@ public class CrosswordActivity extends AppCompatActivity {
             }
         }
 
-        RefreshKeyboard();
+        refreshKeyboard();
 
     }
 
 
-    @OnClick({
-            R.id.crossword_icon_elephant,
-            R.id.crossword_icon_bear,
-            R.id.crossword_icon_zebra,
-            R.id.crossword_icon_hare,
-            R.id.crossword_icon_tiger
-    })
-    public void onCrosswordIconClick(View v) {
-        CrosswordAnimalType animalType = null;
+    // Keyboard drag and drop functionality
 
-        switch (v.getId()) {
+    private void onRightCharacterSelected(View textView, int i, int j) {
+        Utils.showViewWithFadeIn(getApplicationContext(), textView);
+        SoundHandler.playWinSound(getBaseContext());
+        checkForWordCompleted(i, j);
+        refreshKeyboard();
+    }
+    private void checkForWordCompleted(int i, int j) {
+        Pair rowResult = checkRow(i,j);
+        Pair colResult = checkCol(i,j);
 
-            case R.id.crossword_icon_elephant:
-                animalType = CrosswordAnimalType.ELEPHANT; break;
-
-            case R.id.crossword_icon_bear:
-                animalType = CrosswordAnimalType.BEAR; break;
-
-            case R.id.crossword_icon_zebra:
-                animalType = CrosswordAnimalType.ZEBRA; break;
-
-            case R.id.crossword_icon_hare:
-                animalType = CrosswordAnimalType.HARE; break;
-
-            case R.id.crossword_icon_tiger:
-                animalType = CrosswordAnimalType.TIGER; break;
-
+        if (( colResult.completed > 1)  && (colResult.totalToComplete == 1))  { // check there is exactly
+            onWordCompleted();
         }
 
-        SoundHandler.playAnimalWord(getApplicationContext(), animalType);
+        if (( rowResult.completed > 4)  && (rowResult.totalToComplete == 1))  { // check there is exactly
+            onWordCompleted();
+        }
+        states[i][j] = CellState.COMPLETED; // set state to completed
     }
 
+    private void onWordCompleted(){
+        ++words.completed;
 
-    @OnLongClick(R.id.crossword_guide)
-    public boolean onOwlLongClick(View v) {
-        showHint();
-        return true;
-    }
+        // evolve owl icon
 
-    private boolean mHintShown = false;
-    private void showHint() {
-        if (mHintShown) {
-            Toast.makeText(getApplicationContext(), "Already used a hint today...", Toast.LENGTH_SHORT).show();
-            return;
+        @DrawableRes int newOwlIcon = -1;
+
+        switch (words.completed) {
+            case 1: newOwlIcon = R.drawable.owl_2; break;
+            case 2: newOwlIcon = R.drawable.owl_3; break;
+            case 3: newOwlIcon = R.drawable.owl_4; break;
+            case 4: newOwlIcon = R.drawable.owl_5; break;
         }
 
-        int hintsCounter = 0;
-        // go over states array, find first uncompleted items (search by matrix order)
-        for (int i = 0; i < states.length; ++i) {
-            for (int j = 0; j < states[i].length; j++) {
-
-                if (states[i][j] == CellState.NOT_COMPLETED) {
-                    fillCrosswordChar(i, j);
-
-                    // after filling
-                    if (++hintsCounter >= 3) {
-                        mHintShown = true;
-                        return;
-                    }
-                }
-            }
+        if (newOwlIcon != -1) {
+            mOwlGuide.setImageResource(newOwlIcon);
         }
+        if (words.completed == words.totalToComplete){
+            onFinishedCrossword();
+        }
+
     }
 
-    private void fillCrosswordChar(int i, int j) {
-        // todo!
+    private void onFinishedCrossword(){
+        Utils.launchActivity(this, CongratulationsActivity.class);
+        finish();
     }
-
-    private ViewGroup getCrosswordUnit(int i, int j) {
-        ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
-        return (ViewGroup) rowContainer.getChildAt(j);
-    }
-
-    private TextView getCrosswordUnitText(int i, int j) {
-        return (TextView) getCrosswordUnit(i, j).getChildAt(0);
-    }
-
-    private char getDraggedChar() {
-        if (mCurrentDrag == null) return 0;
-        return mCurrentDrag.getText().charAt(0);
-    }
-
 
     private final class MyTouchListener implements View.OnTouchListener {
 
@@ -240,19 +197,8 @@ public class CrosswordActivity extends AppCompatActivity {
 
                     if (getDraggedChar() == mAnswer) { // letter fits
 
-                        Pair rowResult = checkRow(i,j);
-                        Pair colResult = checkCol(i,j);
-
-                        if (( colResult.completed > 1)  && (colResult.totalToComplete == 1))  { // check there is exactly
-                            WordCompleted();
-                        }
-
-                        if (( rowResult.completed > 4)  && (rowResult.totalToComplete == 1))  { // check there is exactly
-                            WordCompleted();
-                        }
-                        states[i][j] = CellState.COMPLETED; // set state to completed
                         View innerView = ((ViewGroup) v).getChildAt(0);
-                        onSuccess(innerView);
+                        onRightCharacterSelected(innerView, i, j);
                         mAnswer = 0;
                     } else {
 //                        Toast.makeText(getApplicationContext(), "Oops.. try again :)", Toast.LENGTH_SHORT).show();
@@ -269,35 +215,31 @@ public class CrosswordActivity extends AppCompatActivity {
         }
 
     }
-    private void WordCompleted(){
-//        Toast.makeText(getApplicationContext(), "Word Completed!", Toast.LENGTH_SHORT).show();
 
-        ++words.completed;
+    private void refreshKeyboard() {
 
-        // evolve owl icon
-
-        @DrawableRes int newOwlIcon = -1;
-
-        switch (words.completed) {
-            case 1: newOwlIcon = R.drawable.owl_2; break;
-            case 2: newOwlIcon = R.drawable.owl_3; break;
-            case 3: newOwlIcon = R.drawable.owl_4; break;
-            case 4: newOwlIcon = R.drawable.owl_5; break;
+        // update characters-counter
+        int draggedIndex = getCharValue(getDraggedChar());
+        // if dragged index is valid (a character was just dragged to the crossword)
+        if (draggedIndex >= 0 && draggedIndex < 26) {
+            --mCharsAtCrossWord[draggedIndex];
         }
 
-        if (newOwlIcon != -1) {
-            mOwlGuide.setImageResource(newOwlIcon);
-        }
-        if (words.completed == words.totalToComplete){
-            FinishedCrossword();
-        }
+        for (int i = 0; i < mKeyboardView.getChildCount(); ++i){
+            ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
 
+            for (int j = 0; j < keyboardLine.getChildCount(); j++) {
+                TextView keyTextView = (TextView) keyboardLine.getChildAt(j);
+
+                if (mCharsAtCrossWord[getCharValue(keyTextView.getText().charAt(0))] > 0) {
+                    keyTextView.setVisibility(View.VISIBLE);
+                } else {
+                    keyTextView.setVisibility(View.GONE);
+                }
+            }
+        }
     }
 
-    private void FinishedCrossword(){
-        Utils.launchActivity(this, CongratulationsActivity.class);
-        finish();
-    }
 
     private Pair checkCol(int i, int j) {
         int uncompleted = 0;
@@ -330,32 +272,7 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
 
-    private void onSuccess(View textView) {
-        Utils.showViewWithFadeIn(getApplicationContext(), textView);
-        SoundHandler.playWinSound(getBaseContext());
-        --mCharsAtCrossWord[getCharValue(getDraggedChar())];
-        RefreshStates();
-        RefreshKeyboard();
-    }
 
-    private void RefreshStates() { // check for
-    }
-
-    private void RefreshKeyboard() {
-        for (int i = 0; i < mKeyboardView.getChildCount(); ++i){
-
-            ViewGroup keyboardLine = (ViewGroup) mKeyboardView.getChildAt(i);
-            for (int j = 0; j < keyboardLine.getChildCount(); j++) {
-
-                TextView keyTextView = (TextView) keyboardLine.getChildAt(j);
-                if (mCharsAtCrossWord[getCharValue(keyTextView.getText().charAt(0))] > 0) {
-                    keyTextView.setVisibility(View.VISIBLE);
-                } else {
-                    keyTextView.setVisibility(View.GONE);
-                }
-            }
-        }
-    }
 
     private int getCharValue(char c) {
         if (Character.isLowerCase(c)){
@@ -364,6 +281,115 @@ public class CrosswordActivity extends AppCompatActivity {
         else{
             return c - 65;
         }
+    }
+
+
+    // views utils
+
+    private ViewGroup getCrosswordUnit(int i, int j) {
+        ViewGroup rowContainer = (ViewGroup) mCrosswordContainer.getChildAt(i);
+        return (ViewGroup) rowContainer.getChildAt(j);
+    }
+
+    private TextView getCrosswordUnitText(int i, int j) {
+        return (TextView) getCrosswordUnit(i, j).getChildAt(0);
+    }
+
+    private char getDraggedChar() {
+        if (mCurrentDrag == null) return 0;
+        return mCurrentDrag.getText().charAt(0);
+    }
+
+
+
+
+
+    /* Extra Features ------------------------- */
+
+    // background music
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SoundHandler.startBgMusic(getApplicationContext());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SoundHandler.stopBgMusic(getApplicationContext());
+    }
+
+
+    // icon click functionality (say crossword word)
+    @OnClick({
+            R.id.crossword_icon_elephant,
+            R.id.crossword_icon_bear,
+            R.id.crossword_icon_zebra,
+            R.id.crossword_icon_hare,
+            R.id.crossword_icon_tiger
+    })
+    public void onCrosswordIconClick(View v) {
+        CrosswordAnimalType animalType = null;
+
+        switch (v.getId()) {
+
+            case R.id.crossword_icon_elephant:
+                animalType = CrosswordAnimalType.ELEPHANT; break;
+
+            case R.id.crossword_icon_bear:
+                animalType = CrosswordAnimalType.BEAR; break;
+
+            case R.id.crossword_icon_zebra:
+                animalType = CrosswordAnimalType.ZEBRA; break;
+
+            case R.id.crossword_icon_hare:
+                animalType = CrosswordAnimalType.HARE; break;
+
+            case R.id.crossword_icon_tiger:
+                animalType = CrosswordAnimalType.TIGER; break;
+
+        }
+
+        SoundHandler.playAnimalWord(getBaseContext(), animalType);
+    }
+
+
+    // hint functionality
+
+    @OnLongClick(R.id.crossword_guide)
+    public boolean onOwlLongClick(View v) {
+        showHint();
+        return true;
+    }
+
+    private boolean mHintShown = false;
+    private void showHint() {
+        if (mHintShown) {
+            Toast.makeText(getApplicationContext(), "Already used a hint today...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int hintsCounter = 0;
+        // go over states array, find first uncompleted items (search by matrix order)
+        for (int i = 0; i < states.length; ++i) {
+            for (int j = 0; j < states[i].length; j++) {
+
+                if (states[i][j] == CellState.NOT_COMPLETED) {
+                    fillCrosswordChar(i, j);
+
+                    // after filling
+                    if (++hintsCounter >= 3) {
+                        mHintShown = true;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private void fillCrosswordChar(int i, int j) {
+        // todo!
     }
 
 }
