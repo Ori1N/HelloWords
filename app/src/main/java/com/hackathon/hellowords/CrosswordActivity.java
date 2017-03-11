@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 
@@ -43,7 +44,9 @@ public class CrosswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_crossword);
+        ButterKnife.bind(this);
 
         this.crossword = CrosswordUtils.getCrosswordMatrix();
         this.words = new Pair(0, CrosswordUtils.getWords());

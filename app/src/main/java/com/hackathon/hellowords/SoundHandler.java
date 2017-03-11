@@ -65,4 +65,5 @@ public class SoundHandler {
     public static void stopBgMusic(Context context) {
         backgroundMusic.stop();
     }
+
 }
